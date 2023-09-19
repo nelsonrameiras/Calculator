@@ -1,50 +1,69 @@
-﻿internal class Program
+﻿using CalculatorLibrary;
+class CalculatorProgram
 {
-    private static void Main(string[] args)
+    static void Main(string[] args)
     {
+        bool endApp = false;
+
         Console.WriteLine("Hello, dear user! \n" +
-    "\nThis is a console calculator. Please, use it, and I hope it meets your standards!");
+   "\nThis is a console calculator. Please, use it, and I hope it meets your standards!");
 
-        Console.WriteLine("\n");
-
-        Console.WriteLine("Please, input the first number: ");
-        double a = Convert.ToDouble(Console.ReadLine());
-
-        Console.WriteLine("\n");
-
-        Console.WriteLine("Please, input the second number: ");
-        double b = Convert.ToDouble(Console.ReadLine());
-
-        Console.WriteLine("\n");
-
-        Console.WriteLine("Choose one of the following options:");
-        Console.WriteLine("\ta - Addition");
-        Console.WriteLine("\ts - Subtract");
-        Console.WriteLine("\tm - Multiply");
-        Console.WriteLine("\td - Divide");
-        Console.WriteLine("Your option? ");
-
-        switch (Console.ReadLine())
+        while (!endApp)
         {
-            case "a":
-                Console.WriteLine($"\nYour result: {a} + {b} = " + (a + b));
-                break;
-            case "s":
-                Console.WriteLine($"\nYour result: {a} - {b} = " + (a - b));
-                break;
-            case "m":
-                Console.WriteLine($"\nYour result: {a} * {b} = " + a * b);
-                break;
-            case "d":
-                while (b == 0)
+            string numIA = "";
+            string numIB = "";
+            double result = 0;
+
+            Console.Write("\n\nPlease, input the first number: ");
+            numIA = Console.ReadLine();
+
+            double cleanA = 0;
+            while (!double.TryParse(numIA, out cleanA))
+            {
+                Console.Write("This is not a valid input. Please, enter an integer value: ");
+                numIA = Console.ReadLine();
+            }
+
+            Console.Write("\nPlease, input the second number: ");
+            numIB = Console.ReadLine();
+
+            double cleanB = 0;
+            while (!double.TryParse(numIB, out cleanB))
+            {
+                Console.Write("This is not valid input. Please, enter an integer value: ");
+                numIB = Console.ReadLine();
+            }
+
+            Console.WriteLine("\nChoose an operator from the following list:");
+            Console.WriteLine("\ta - Add;");
+            Console.WriteLine("\ts - Subtract;");
+            Console.WriteLine("\tm - Multiply;");
+            Console.WriteLine("\td - Divide.");
+            Console.WriteLine("\n");
+            Console.Write("Your option? ");
+
+            string op = Console.ReadLine();
+
+            try
+            {
+                result = Calculator.HeavyLifting(cleanA, cleanB, op);
+                if (double.IsNaN(result))
                 {
-                    Console.WriteLine("\nPlease, enter a non-null divisor: ");
-                    b = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                Console.WriteLine($"\nYour result: {a} / {b} = " + a / b);
-                break;
-            default:
-                break;
+                else Console.WriteLine("\n\nYour result: {0:0.##}\n", result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unfortunately, an exception occurred, whilst trying to do the math.\n - Details: " + e.Message);
+            }
+
+
+            Console.Write("\nPress 'c' and Enter, to close the app, or press any other key and Enter to continue: ");
+            if (Console.ReadLine() == "c") endApp = true;
+
+            Console.WriteLine("\n");
         }
+        return;
     }
 }
