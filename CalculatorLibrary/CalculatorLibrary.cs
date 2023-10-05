@@ -5,14 +5,16 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
-        JsonWriter writer;
+        readonly JsonWriter writer;
 
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
-            writer = new JsonTextWriter(logFile);
-            writer.Formatting = Formatting.Indented;
+            writer = new JsonTextWriter(logFile)
+            {
+                Formatting = Formatting.Indented
+            };
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
@@ -32,22 +34,45 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = a + b;
-                    writer.WriteValue("Add");
+                    writer.WriteValue("Addition");
                     break;
                 case "s":
                     result = a - b;
-                    writer.WriteValue("Subtract");
+                    writer.WriteValue("Subtraction");
                     break;
                 case "m":
                     result = a * b;
-                    writer.WriteValue("Multiply");
+                    writer.WriteValue("Multiplication");
                     break;
                 case "d":
                     if (b != 0)
                     {
                         result = a / b;
                     }
-                    writer.WriteValue("Divide");
+                    writer.WriteValue("Division");
+                    break;
+                case "r":
+                    if (a >= 0 && b != 0)
+                    {
+                        result = Math.Pow(a , 1/b);
+                    }
+                    writer.WriteValue("N_th root");
+                    break;
+                case "e":
+                        result = Math.Pow(a , b);
+                    writer.WriteValue("Exponentiation");
+                    break;
+                case "x":
+                    result = b*Math.Exp(a);
+                    writer.WriteValue("Eulerian Exponentiation");
+                    break;
+                case "l":
+                    result = Math.Log(a , b);
+                    writer.WriteValue("Logarithm of base b");
+                    break;
+                case "u":
+                    result = b*Math.Log(a);
+                    writer.WriteValue("Eulerian Logarithm");
                     break;
                 default:
                     break;
