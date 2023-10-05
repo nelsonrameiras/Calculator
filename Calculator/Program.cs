@@ -16,7 +16,7 @@ namespace CalculatorProgram
             Console.WriteLine("Hello, dear user! \n" +
        "\nThis is a console calculator. Please, use it, and I hope it meets your standards!");
 
-            Console.WriteLine("\nThe following operators are available. Please, note their restrictions, and do not forget they're lowercase:");
+            Console.WriteLine("\nThe following operators are available. Please, note their restrictions: ");
             Console.WriteLine("\ta - Addition;");
             Console.WriteLine("\ts - Subtraction;");
             Console.WriteLine("\tm - Multiplication;");
@@ -34,7 +34,7 @@ namespace CalculatorProgram
                 string numIA, numIB;
                 double result;
 
-                Console.Write("\n\nPlease, input the first number (>= 0 for the n_th root and > 0 for the logarithms): ");
+                Console.Write("\n\nPlease, input the first integer number (>= 0 for the n_th root and > 0 for the logarithms): ");
                 numIA = Console.ReadLine();
 
                 double cleanA;
@@ -44,7 +44,7 @@ namespace CalculatorProgram
                     numIA = Console.ReadLine();
                 }
 
-                Console.Write("\nPlease, input the second number (!= 0 for division and n_th root, and both > 0 and != 1 for the base b logarithm): ");
+                Console.Write("\nPlease, input the second integer number (!= 0 for division and n_th root, and both > 0 and != 1 for the base b logarithm): ");
                 numIB = Console.ReadLine();
 
                 double cleanB;
@@ -57,8 +57,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\n");
                 Console.Write("Please, choose an operator: ");
 
-                string op = Console.ReadLine()!;
-                op.ToLower();
+                string op = Console.ReadLine().ToLower();
 
                 try
                 {

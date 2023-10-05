@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -54,24 +53,24 @@ namespace CalculatorLibrary
                 case "r":
                     if (a >= 0 && b != 0)
                     {
-                        result = Math.Pow(a , 1/b);
+                        result = Math.Pow(a, 1 / b);
                     }
                     writer.WriteValue("N_th root");
                     break;
                 case "e":
-                        result = Math.Pow(a , b);
+                    result = Math.Pow(a, b);
                     writer.WriteValue("Exponentiation");
                     break;
                 case "x":
-                    result = b*Math.Exp(a);
+                    result = b * Math.Exp(a);
                     writer.WriteValue("Eulerian Exponentiation");
                     break;
                 case "l":
-                    result = Math.Log(a , b);
+                    result = Math.Log(a, b);
                     writer.WriteValue("Logarithm of base b");
                     break;
                 case "u":
-                    result = b*Math.Log(a);
+                    result = b * Math.Log(a);
                     writer.WriteValue("Eulerian Logarithm");
                     break;
                 default:
